@@ -24,7 +24,7 @@ class MyArr {
         const elementToRemove = this.data["0"];
         delete this.data["0"];
         this.size--;
-        for(let i=0 ;i<this.size ; i++){
+        for( let i = 0 ; i < this.size ; i++ ){
             this.data[i] = this.data[i+1];
             delete this.data[i+1];
         
@@ -33,7 +33,7 @@ class MyArr {
     }
     unshift(newElement){
         
-        for(let i= this.size; i>0; i--){
+        for( let i = this.size ; i > 0 ; i-- ){
             this.data[i] = this.data[i-1];
         }
         this.data["0"] = newElement;
@@ -47,7 +47,7 @@ class MyArr {
         const elementToRemove = this.data[idx];
         delete this.data[idx];
 
-        for(let i=idx+1; i<this.size;i++){
+        for(let i = idx + 1; i <this.size ;i++ ){
            this.data[i-1] = this.data[i]; 
            delete this.data[i];
         }
@@ -57,10 +57,23 @@ class MyArr {
     getAllArray(){
         return this.data;
     }
-    //Todo - implement the following:
-    //1. Delete all array
-    //2.Reverse array
-
+    deleteAll(){
+        for( let i = 0 ; i < this.size ; i++ ){
+            delete this.data[i];
+        }
+        this.size = 0;
+    }
+    reverseArr(){
+        let temp;
+        const halfIdx = this.size/2;
+        const lastIdx = this.size - 1;
+        for( let i = 0; i < halfIdx; i++ ){
+            temp = this.data[i];
+            this.data[i] =this.data[lastIdx-i];
+            this.data[lastIdx-i] = temp;
+        }
+        return this. data;
+    }
 }
 
 const myArr = new MyArr()
