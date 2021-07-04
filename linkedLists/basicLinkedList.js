@@ -139,9 +139,25 @@ class SingleLinkedList {
             this.append(new LinkListNode(arr[i]))
         }
     }
-    //TODO - implement the following:
-    //1. Reverse
+    reverse(){
+        let currentNode = this.head;
+        let prevNode = null;
+        let nextNode = null;
 
+        
+        while(currentNode){
+            //Disconnect current node
+            nextNode = currentNode.next;
+            currentNode.next = prevNode;
+            //Reassign roles
+            prevNode = currentNode;
+            currentNode = nextNode;
+        }
+        
+        this.tail = this.head;
+        this.head = prevNode;
+        return this;
+    }
 }
 
 const list = new SingleLinkedList();
