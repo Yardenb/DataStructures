@@ -5,7 +5,7 @@ class LinkListNode {
     }
 }
 
-class SingleLinkedList {
+export class SingleLinkedList {
     constructor(arr){
         this.head = null;
         this.tail = null;
@@ -15,11 +15,12 @@ class SingleLinkedList {
         }
     }
     //Returns list
-    prepend(node){
+    prepend(value){
         //If it's the first element
         if(!this.tail){
             this.tail = node;
         }
+        const node = new LinkListNode(value);
         //Link the new node
         node.next = this.head;
         //Update head pointer
@@ -29,7 +30,8 @@ class SingleLinkedList {
         return this;
     }
     //Returns list
-    append(node){
+    append(value){
+        const node = new LinkListNode(value);
         //If it's the first element
         if(!this.head){
             this.head = node;
@@ -160,11 +162,3 @@ class SingleLinkedList {
     }
 }
 
-const list = new SingleLinkedList();
-const node = new LinkListNode('test');
-const node2 = new LinkListNode('test 2');
-const node3 = new LinkListNode('test 3');
-list.append(node);
-list.append(node2);
-list.append(node3);
-console.log(list);
