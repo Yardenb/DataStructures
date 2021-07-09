@@ -69,12 +69,86 @@ class DoubleLinkedList {
     }
     deleteAll(){
         this.head = this.tail = null;
+        this.size = 0;
+    }
+    findByValue(value){
+        let nextNode = this.head;
+        while(nextNode){
+            if(nextNode.data === value){
+                return nextNode;
+            }
+            nextNode = nextNode.next;
+        }
+        return null;
+    }
+    findAllByValue(value){
+        let nextNode = this.head;
+        let foundNodes = [];
+        while(nextNode){
+            if(nextNode.data === value){
+                foundNodes.push(nextNode)
+            }
+            nextNode = nextNode.next;
+        }
+        return foundNodes;
+    }
+    deleteByValue(value){
+        const nodeToDelete = this.findByValue(value);
+        return this.deleteNode(nodeToDelete);
+    }
+    deleteNode(nodeToDelete){
+        if(!nodeToDelete){
+            return null;
+        }
+        const prev = nodeToDelete.prev;
+        const next = nodeToDelete.next;
+       
+        if(!prev){//Then it's the head
+            return this.deleteHead()
+        }
+        if(!next){//Then it's the tail
+            return this.deleteTail()
+        }
+        prev.next = next;
+        next.prev = prev;
+        this.size--;
+        return nodeToDelete;
+    }
+    deleteAllByValue(value){
+        const nodesToDelete = this.findAllByValue(value);
+        for(let i =0 ; i < nodesToDelete.length; i++){
+            this.deleteNode(nodesToDelete[i]);
+        }
+        return this;
+    }
+    createArrayFromList(){
+        const arr = [];
+        let currentNode = this.head;
+        while(currentNode){
+            arr.push(currentNode.data);
+            currentNode = currentNode.next;
+        }
+        return arr;
+    }
+    createListFromArray(arr){
+        for(let i = 0; i < arr.length; i++){
+            this.append(arr[i]);
+        }
+        return this;
+    }
+    reverse(){
+        
+        let currentNode = this.tail;
+        this.tail = this.head;
+        this.head = currentNode;
+
+        while(currentNode){
+            const temp = currentNode.prev;
+            currentNode.prev = currentNode.next;
+            currentNode.next = temp;
+            currentNode = currentNode.next;
+        }
+        return this;
     }
 }
-//TODO:
-//1. Find by value
-//2. Delete by value
-//3. Create array
-//4. Create from array
-//5. Reverse
 const doubleLinked = new DoubleLinkedList();
